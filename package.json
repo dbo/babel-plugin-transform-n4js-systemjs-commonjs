@@ -1,6 +1,6 @@
 {
   "name": "babel-plugin-transform-n4js-systemjs-commonjs",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "description": "A babel plugin to transform N4JS SystemJS modules into CommonJS, enabling webpack/browserify.",
   "main": "sysreg.js",
   "scripts": {
@@ -15,7 +15,8 @@
   ],
   "keywords": [
     "n4js",
-    "babel"
+    "babel",
+    "loader"
   ],
   "author": "Daniel Bölzle",
   "license": "MIT",
