@@ -1,0 +1,50 @@
+{
+  "name": "babel-plugin-transform-n4js-systemjs-commonjs",
+  "version": "1.0.1",
+  "description": "A babel plugin to transform N4JS SystemJS modules into CommonJS, enabling webpack/browserify.",
+  "main": "sysreg.js",
+  "scripts": {
+    "test": "eslint . && mocha tests",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+  },
+  "engines": {
+    "node": ">=6.4.0"
+  },
+  "files": [
+    "index.js"
+  ],
+  "keywords": [
+    "n4js",
+    "babel"
+  ],
+  "author": "Daniel Bölzle",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dbo/babel-plugin-transform-n4js-systemjs-commonjs.git"
+  },
+  "devDependencies": {
+    "babel-core": "^6.17.0",
+    "cz-conventional-changelog": "^1.2.0",
+    "eslint": "^3.7.1",
+    "mocha": "^3.1.2"
+  },
+  "eslintConfig": {
+    "env": {
+      "es6": true
+    },
+    "extends": "eslint:recommended",
+    "rules": {
+      "strict": "error",
+      "no-trailing-spaces": "error"
+    }
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "dependencies": {
+    "lodash": "^4.16.4"
+  }
+}
