@@ -22,6 +22,7 @@ const getParentDirOf = path => {
 };
 
 const getModuleIdOf = (path, verbose) => {
+    const origPath = path;
     for (let dir = getParentDirOf(path); dir; dir = getParentDirOf(dir)) {
         if (lib_fs.existsSync(lib_path.join(dir, "package.json"))) {
             dir = getParentDirOf(dir);
@@ -32,7 +33,7 @@ const getModuleIdOf = (path, verbose) => {
     path = path.split(lib_path.sep).join("/");
     path = path.replace(/\.js$/, "");
     if (verbose) {
-        console.log("### getModuleIdOf", path);
+        console.log(`[babel-plugin-transform-n4js-systemjs-commonjs] getModuleIdOf(${origPath}) => ${path}`);
     }
     return path;
 };
