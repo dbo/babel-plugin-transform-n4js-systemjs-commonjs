@@ -8,4 +8,4 @@
 
 		module.exports = {};
 	}, module, "babel-plugin-transform-n4js-systemjs-commonjs/tests/data/dummy/regdyn");
-})(require("n4js-node").System);
+})(require("n4js-node").staticSystem);

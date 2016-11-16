@@ -12,5 +12,5 @@
 			execute: function () {}
 		};
 	}, module, 'babel-plugin-transform-n4js-systemjs-commonjs/tests/data/dummy/no_deps');
-})(require('n4js-node').System);
+})(require('n4js-node').staticSystem);
 //--# sourceMappingURL=dep.map--

@@ -104,6 +104,7 @@ module.exports = ({types: t}) => {
                         let consequent = fnExpr.arguments[0].consequent;
                         consequent.callee.object.arguments = [t.stringLiteral("n4js-node")];
                         //consequent.arguments[0] = t.nullLiteral();
+                        consequent.callee.property = t.identifier("staticSystem");
                         fnExpr.arguments = [consequent.callee];
 
                         let sysRegExpr = fnExpr.callee.body.body[0].expression;
