@@ -26,6 +26,7 @@ $ babel --plugins transform-n4js-systemjs-commonjs ...
 Plugin Options:
 - `verbose: [string]` switches on verbose logging of the used module IDs
 - `stripPackageID_re: [string|Regexp]` regex to rewrite/strip parts of the package ID by convention
+- `noSourceMap: [boolean]` whether the N4JS source-map reference should be dropped; defaults to `true`
 
 ## License
 

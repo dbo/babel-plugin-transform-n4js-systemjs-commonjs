@@ -91,8 +91,12 @@ module.exports = ({types: t}) => {
                 let program = path.node,
                     opts = state.opts || {},
                     verbose = opts.verbose,
-                    stripPackageID_re = opts.stripPackageID_re;
+                    stripPackageID_re = opts.stripPackageID_re,
+                    noSourceMap = opts.noSourceMap;
 
+                if (typeof noSourceMap === "undefined") {
+                    noSourceMap = true;
+                }
                 if (stripPackageID_re && !(stripPackageID_re instanceof RegExp)) {
                     stripPackageID_re = new RegExp(stripPackageID_re);
                 }
@@ -124,12 +128,14 @@ module.exports = ({types: t}) => {
                             sysRegExpr.arguments.push(t.stringLiteral(getModuleIdOf(filename, verbose)));
                         }
 
-                        let comments = path.container.comments;
-                        comments.forEach(c => {
-                            if (c.value.startsWith("# sourceMappingURL=")) {
-                                c.value = `--${c.value}--`;
-                            }
-                        });
+                        if (noSourceMap) {
+                            let comments = path.container.comments;
+                            comments.forEach(c => {
+                                if (c.value.startsWith("# sourceMappingURL=")) {
+                                    c.value = `--${c.value}--`;
+                                }
+                            });
+                        }
 
                         // replace all System._nodeRequire calls
                         path.traverse(_nodeRequireVisitor);
