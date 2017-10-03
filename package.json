@@ -27,7 +27,7 @@
     "babel-core": "^6.17.0",
     "cz-conventional-changelog": "^1.2.0",
     "eslint": "^4.1.1",
-    "mocha": "^3.1.2",
+    "mocha": "^4.0.0",
     "semantic-release": "^7.0.1"
   },
   "eslintConfig": {
