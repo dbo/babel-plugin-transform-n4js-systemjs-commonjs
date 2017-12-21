@@ -28,7 +28,7 @@
     "cz-conventional-changelog": "^2.1.0",
     "eslint": "^4.1.1",
     "mocha": "^4.0.0",
-    "semantic-release": "^8.2.0"
+    "semantic-release": "^11.0.2"
   },
   "eslintConfig": {
     "env": {
