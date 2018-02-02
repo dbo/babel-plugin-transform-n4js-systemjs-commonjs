@@ -168,8 +168,8 @@ const n4jsModulePatternMatcher = _.matches({
                                 name: "require"
                             },
                             arguments: [{
-                                type: "StringLiteral",
-                                value: "n4js-node/index"
+                                type: "StringLiteral"
+//                                value: "n4js-node/index"
                             }]
                         },
                         property: {
