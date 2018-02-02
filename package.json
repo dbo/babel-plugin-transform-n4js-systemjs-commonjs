@@ -4,7 +4,8 @@
   "main": "sysreg.js",
   "scripts": {
     "test": "eslint . && mocha tests",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+    "semantic-release": "semantic-release",
+    "travis-deploy-once": "travis-deploy-once"
   },
   "engines": {
     "node": ">=6.4.0"
@@ -28,7 +29,8 @@
     "cz-conventional-changelog": "^2.1.0",
     "eslint": "^4.16.0",
     "mocha": "^5.0.0",
-    "semantic-release": "^12.4.1"
+    "semantic-release": "^12.4.1",
+    "travis-deploy-once": "^4.3.3"
   },
   "eslintConfig": {
     "env": {
@@ -47,5 +49,6 @@
   },
   "dependencies": {
     "lodash": "^4.17.4"
-  }
+  },
+  "version": "0.0.0-development"
 }
