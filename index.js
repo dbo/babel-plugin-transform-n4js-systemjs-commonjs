@@ -91,50 +91,37 @@ module.exports = ({types: t}) => {
                 let program = path.node,
                     opts = state.opts || {},
                     verbose = opts.verbose,
-                    stripPackageID_re = opts.stripPackageID_re,
-                    noSourceMap = opts.noSourceMap;
+                    stripPackageID_re = opts.stripPackageID_re;
 
-                if (typeof noSourceMap === "undefined") {
-                    noSourceMap = true;
-                }
                 if (stripPackageID_re && !(stripPackageID_re instanceof RegExp)) {
                     stripPackageID_re = new RegExp(stripPackageID_re);
                 }
 
                 if (n4jsModulePatternMatcher(program)) {
                     try {
-                        let fnExpr = program.body[0].expression;
+                        const fnExpr = program.body[0].expression;
 
                         // reduce ternary footer:
-                        let consequent = fnExpr.arguments[0].consequent;
+                        const consequent = fnExpr.arguments[0].consequent;
                         consequent.callee.object.arguments = [t.stringLiteral("n4js-node")];
                         //consequent.arguments[0] = t.nullLiteral();
                         consequent.callee.property = t.identifier("staticSystem");
                         fnExpr.arguments = [consequent.callee];
 
-                        let sysRegExpr = fnExpr.callee.body.body[0].expression;
-                        let sysregDeps = sysRegExpr.arguments[0];
+                        const sysRegExpr = fnExpr.callee.body.body[0].expression;
+                        const sysregDeps = sysRegExpr.arguments[0];
                         sysregDeps.elements = sysregDeps.elements.map(d => t.callExpression(t.identifier("require"), [buildDep(d, stripPackageID_re)]));
 
-                        let dynregCallback = sysRegExpr.arguments[2];
+                        const dynregCallback = sysRegExpr.arguments[2];
                         if (dynregCallback) { // registerDynamic
                             // Get require symbol out of the way
                             dynregCallback.params[0] = t.identifier("__require");
                         }
 
                         sysRegExpr.arguments.push(t.identifier("module"));
-                        let filename = state.file.opts.filename;
+                        const filename = state.file.opts.filename;
                         if (filename !== "unknown") {
                             sysRegExpr.arguments.push(t.stringLiteral(getModuleIdOf(filename, verbose)));
-                        }
-
-                        if (noSourceMap) {
-                            let comments = path.container.comments;
-                            comments.forEach(c => {
-                                if (c.value.startsWith("# sourceMappingURL=")) {
-                                    c.value = `--${c.value}--`;
-                                }
-                            });
                         }
 
                         // replace all System._nodeRequire calls
