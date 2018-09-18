@@ -11,7 +11,7 @@ const path = p => lib_path.resolve(__dirname, ...p.split("/"));
 const read = p => String(lib_fs.readFileSync(path(p)));
 
 const babelOptions = {
-    plugins: [[path("../index.js"), {
+    plugins: [[path("../transform-n4js-systemjs-commonjs.js"), {
         //verbose: true,
         stripPackageID_re: "\\.api$"
     }]]
@@ -29,7 +29,7 @@ describe("N4JS SystemJS -> CommonJS", () => {
     it("transforms System.registerDynamic", () => fixtureTest("data/dummy/regdyn"));
 
     it("keeps non-N4JS modules as is", () => {
-        const pluginCode = read("../index.js");
+        const pluginCode = read("../transform-n4js-systemjs-commonjs.js");
         const expected = babel.transformSync(pluginCode).code;
         const res = babel.transformSync(pluginCode, babelOptions).code;
         assert.equal(res, expected, "should be the same output");
