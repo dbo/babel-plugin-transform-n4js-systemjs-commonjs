@@ -5,7 +5,7 @@
 const lib_path = require("path");
 const lib_fs = require("fs");
 const assert = require("assert");
-const babel = require("babel-core");
+const babel = require("@babel/core");
 
 const path = p => lib_path.resolve(__dirname, ...p.split("/"));
 const read = p => String(lib_fs.readFileSync(path(p)));
@@ -18,7 +18,7 @@ const babelOptions = {
 };
 
 const fixtureTest = p => {
-    let res = babel.transformFileSync(path(`${p}.js`), babelOptions).code;
+    const res = babel.transformFileSync(path(`${p}.js`), babelOptions).code;
     //console.log(res, read(`${p}_fixture.js`));
     assert.equal(res, read(`${p}_fixture.js`), "should be the same output");
 };
@@ -29,9 +29,9 @@ describe("N4JS SystemJS -> CommonJS", () => {
     it("transforms System.registerDynamic", () => fixtureTest("data/dummy/regdyn"));
 
     it("keeps non-N4JS modules as is", () => {
-        let pluginCode = read("../index.js");
-        let expected = babel.transform(pluginCode).code;
-        let res = babel.transform(pluginCode, babelOptions).code;
+        const pluginCode = read("../index.js");
+        const expected = babel.transformSync(pluginCode).code;
+        const res = babel.transformSync(pluginCode, babelOptions).code;
         assert.equal(res, expected, "should be the same output");
     });
 });
